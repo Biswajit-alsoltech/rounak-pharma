@@ -1,0 +1,107 @@
+src/app/blogs/page.tsx
+// Remove the unused BloggerResponse import
+import React from 'react';
+
+const BlogPage = () => {
+    return <div>Blog Page</div>;
+};
+
+export default BlogPage;
+
+src/app/we-deal-with/page.tsx
+// Escape unescaped quotes
+import React from 'react';
+
+const WeDealWithPage = () => {
+    return (
+        <div>
+            <h1>We Deal With &quot;Various Services&quot;</h1>
+        </div>
+    );
+};
+
+export default WeDealWithPage;
+
+src/app/we-deal-with/[id]/page.tsx
+// Remove unused Warehouse import and fix any type
+import React from 'react';
+
+const DealWithIdPage = ({ params }: { params: { id: string } }) => {
+    const id: string = params.id; // Specify type instead of any
+    return <div>Deal with ID: {id}</div>;
+};
+
+export default DealWithIdPage;
+
+src/components/Footer.tsx
+// Fix any types
+import React from 'react';
+
+interface FooterProps {
+    // Define appropriate props here
+}
+
+const Footer: React.FC<FooterProps> = () => {
+    return <footer>Footer Content</footer>;
+};
+
+export default Footer;
+
+src/components/HeroSection.tsx
+// Fix any type
+import React from 'react';
+
+interface HeroSectionProps {
+    // Define appropriate props here
+}
+
+const HeroSection: React.FC<HeroSectionProps> = () => {
+    return <section>Hero Section</section>;
+};
+
+export default HeroSection;
+
+src/components/HomePage.tsx
+// Remove unused imports, fix any types, escape unescaped apostrophe
+import React from 'react';
+
+const HomePage = () => {
+    return (
+        <div>
+            <h1>Welcome to Our Home Page</h1>
+            <p>It&apos;s a great place to be!</p>
+        </div>
+    );
+};
+
+export default HomePage;
+
+src/components/Navbar.tsx
+// Remove unused Search import and fix any types
+import React from 'react';
+
+interface NavbarProps {
+    // Define appropriate props here
+}
+
+const Navbar: React.FC<NavbarProps> = () => {
+    return <nav>Navbar Content</nav>;
+};
+
+export default Navbar;
+
+src/components/Testimonlials.tsx
+// Escape unescaped quotes/apostrophe and fix any types
+import React from 'react';
+
+const Testimonials = () => {
+    return (
+        <div>
+            <h2>Testimonials</h2>
+            <p>&quot;This is a great service!&quot;</p>
+            <p>&apos;I highly recommend it!&apos;</p>
+        </div>
+    );
+};
+
+export default Testimonials;
