@@ -7,8 +7,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { apiFetch } from '@/lib/api';
 
-// --- Type Definitions ---
-// This is the consistent data structure used within the component
+
 interface Product {
   id: number;
   name: string;
@@ -18,6 +17,16 @@ interface Product {
   ptr: string;
   qty: string;
 }
+
+interface ApiProduct {
+  id: number;
+  product_name: string;
+  m_name: string;
+  category?: string; // Optional property
+  mrp: string | number;
+  ptr: string | number;
+  qty?: string; // Optional property
+} 
 
 interface ManufacturerInfo {
     m_name: string;
@@ -58,7 +67,7 @@ const ManufacturerPage = () => {
         if (response.success && Array.isArray(response.data)) {
           if (response.data.length > 0) {
             // Transform the incoming API data to match our component's Product interface
-            const transformedProducts = response.data.map((p: any) => ({
+            const transformedProducts = response.data.map((p: ApiProduct) => ({
               id: p.id,
               name: p.product_name,
               company: p.m_name,

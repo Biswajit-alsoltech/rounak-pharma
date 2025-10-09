@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react';
 import { apiFetch } from '@/lib/api'; 
 import Image from 'next/image';
 
-// --- Static Data ---
+
 const quickLinks = [
   { name: 'About Us', href: '/about' },
   { name: 'Delivery & Returns', href: '/delivery-returns' },
@@ -22,7 +22,10 @@ const legalLinks = [
   { name: 'Refund Policy', href: '/refund-policy' },
 ];
 
-// --- Type for our settings object ---
+interface ApiSetting {
+  key: string;
+  value: string;
+}
 interface Settings {
   [key: string]: string;
 }
@@ -37,7 +40,7 @@ const Footer = () => {
         setIsLoading(true);
         const response = await apiFetch('/settings');
         if (response.success && Array.isArray(response.data)) {
-          const settingsMap = response.data.reduce((acc: { [x: string]: any; }, item: { key: string | number; value: any; }) => {
+          const settingsMap = response.data.reduce((acc: Settings, item: ApiSetting) => {
             acc[item.key] = item.value;
             return acc;
           }, {} as Settings);

@@ -17,6 +17,10 @@ interface Testimonial {
   rating: number;
 }
 
+interface ApiSetting {
+  key: string;
+  value: string;
+}
 interface Settings {
   [key: string]: string;
 }
@@ -54,7 +58,7 @@ const TestimonialCard = ({ name, designation, message, rating, image_url }: Test
           {designation && <p className="text-sm text-slate-500">{designation}</p>}
         </div>
       </div>
-      <p className="text-slate-600 text-[15px] leading-relaxed line-clamp-6">"{message}"</p>
+      <p className="text-slate-600 text-[15px] leading-relaxed line-clamp-6">&quot;{message}&quot;</p>
     </div>
     <div className="flex mt-4 pt-4 border-t border-slate-100">
       {Array.from({ length: 5 }).map((_, i) => (
@@ -97,7 +101,7 @@ const UpgradedTestimonials = () => {
       try {
         const response = await apiFetch('/settings');
         if (response.success && Array.isArray(response.data)) {
-          const settingsMap = response.data.reduce((acc: any, item: any) => {
+          const settingsMap = response.data.reduce((acc: Settings, item: ApiSetting) => {
             acc[item.key] = item.value;
             return acc;
           }, {} as Settings);
@@ -153,7 +157,7 @@ const UpgradedTestimonials = () => {
             Trusted by Our Partners
           </h2>
           <p className="mt-3 text-lg text-slate-600 max-w-2xl mx-auto">
-            We're proud to have earned the trust of over 1,000 happy customers across the industry.
+            We&apos;re proud to have earned the trust of over 1,000 happy customers across the industry.
           </p>
         </motion.div>
 

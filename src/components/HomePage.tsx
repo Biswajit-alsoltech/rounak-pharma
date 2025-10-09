@@ -6,12 +6,25 @@ import Testimonials from './Testimonlials';
 import React, { useEffect, useState } from 'react';
 import { apiFetch } from '@/lib/api';
 import FeaturedCompanies from './FeaturedCompanies';
-import { motion,Variants } from 'framer-motion'; // Import motion
+import { motion,Variants } from 'framer-motion'; 
 import CoolTimelineSection from './CoolTimelineSection';
 import Link from 'next/link';
 
 
-const sectionVariants: Variants = { // ✅ Add : Variants
+
+interface ApiSetting {
+  key: string;
+  value: string;
+}
+
+interface Cater {
+  id: number;
+  title: string;
+  image_url?: string | null;
+  icon?: string | null;
+}
+
+const sectionVariants: Variants = { 
   hidden: { opacity: 0, y: 50 },
   visible: {
     opacity: 1,
@@ -24,7 +37,7 @@ interface Settings {
   [key: string]: string;
 }
 
-const gridContainerVariants: Variants = { // ✅ Add : Variants
+const gridContainerVariants: Variants = { 
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
@@ -34,7 +47,7 @@ const gridContainerVariants: Variants = { // ✅ Add : Variants
   },
 };
 
-const gridItemVariants: Variants = { // ✅ Add : Variants
+const gridItemVariants: Variants = { 
   hidden: { opacity: 0, y: 30, scale: 0.95 },
   visible: {
     opacity: 1,
@@ -53,7 +66,7 @@ const CaterCardSkeleton = () => (
 );
 
 const HomePage = () => {
-  const [caters, setCaters] = useState<any[]>([]);
+  const [caters, setCaters] = useState<Cater[]>([]);
   const [isLoadingCaters, setIsLoadingCaters] = useState(true);
     const [settings, setSettings] = useState<Settings>({});
 
@@ -74,7 +87,7 @@ const HomePage = () => {
 
         const response = await apiFetch('/settings');
         if (response.success && Array.isArray(response.data)) {
-          const settingsMap = response.data.reduce((acc: { [x: string]: any; }, item: { key: string | number; value: any; }) => {
+          const settingsMap = response.data.reduce((acc: Settings, item: ApiSetting) => {
             acc[item.key] = item.value;
             return acc;
           }, {} as Settings);
@@ -231,7 +244,7 @@ const HomePage = () => {
       >
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-4xl font-bold text-blue-600 mb-3">
-            We're Available on Pharmerack
+            We&apos;re Available on Pharmerack
           </h2>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto">
             Seamless ordering and tracking through India’s trusted pharma platform.

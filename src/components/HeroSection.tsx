@@ -24,6 +24,15 @@ interface Banner {
   buttons?: Button[] | null; // Updated to handle multiple buttons
 }
 
+interface ApiBanner {
+  id: number;
+  title: string;
+  subtitle?: string | null;
+  image_url: string;
+  button_text?: string | null;
+  button_link?: string | null;
+}
+
 // --- Fallback Data ---
 const fallbackBanners: Banner[] = [
   {
@@ -69,7 +78,7 @@ const HeroSection = () => {
         const res = await apiFetch("/banners");
         if (res.success && Array.isArray(res.data) && res.data.length > 0) {
           // Map API response to our new Banner interface
-          const formattedBanners = res.data.map((banner: any) => {
+          const formattedBanners = res.data.map((banner: ApiBanner) => {
             const bannerButtons: Button[] = [];
             // Create a button only if both text and a valid link are provided
             if (banner.button_text && typeof banner.button_link === 'string' && banner.button_link.trim() !== '') {
