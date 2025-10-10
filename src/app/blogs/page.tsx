@@ -2,9 +2,9 @@
 
 import React, { useEffect, useState, useCallback } from "react";
 import Link from "next/link";
-import Image from "next/image"; // ✅ Use Next.js Image component
-import Navbar from "@/components/Navbar"; // ✅ Corrected import path
-import Footer from "@/components/Footer"; // ✅ Corrected import path
+import Image from "next/image";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 // --- Type Definitions ---
 type BloggerEntry = {
@@ -15,11 +15,10 @@ type BloggerEntry = {
     published: { $t: string };
 };
 
-// Add this new type
 type BloggerResponse = {
-  feed?: {
-    entry?: BloggerEntry[];
-  };
+    feed?: {
+        entry?: BloggerEntry[];
+    };
 };
 
 type BlogPost = {
@@ -34,16 +33,13 @@ type BlogPost = {
 const extractImageUrl = (htmlContent: string): string => {
     const imgRegex = /<img[^>]+src="([^">]+)"/;
     const match = htmlContent.match(imgRegex);
-    // Use a local fallback image for better performance and control
     return match ? match[1] : "/images/blog-fallback.png";
 };
 
 const createSnippet = (htmlContent: string, maxLength: number = 110): string => {
-    // This removes all HTML tags to create a plain text snippet
     const plainText = htmlContent.replace(/<[^>]*>/g, "").replace(/\s+/g, ' ').trim();
     return plainText.length <= maxLength ? plainText : plainText.substring(0, maxLength) + "...";
 };
-
 
 // --- UI Components ---
 const SkeletonCard = () => (
@@ -57,7 +53,6 @@ const SkeletonCard = () => (
         </div>
     </div>
 );
-
 
 const BlogPostCard: React.FC<{ post: BlogPost }> = ({ post }) => {
     const imageUrl = extractImageUrl(post.content);
@@ -74,14 +69,13 @@ const BlogPostCard: React.FC<{ post: BlogPost }> = ({ post }) => {
             className="group block overflow-hidden rounded-xl bg-white shadow-lg transition-all duration-300 ease-in-out hover:shadow-2xl hover:-translate-y-2"
         >
             <div className="relative h-48 w-full overflow-hidden">
-                {/* ✅ Replaced <img> with next/image <Image> for optimization */}
                 <Image
                     src={imageUrl}
                     alt={post.title}
                     fill
                     className="object-cover transition-transform duration-500 group-hover:scale-110"
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                    unoptimized // Recommended for external URLs not configured in next.config.js
+                    unoptimized
                 />
             </div>
             <div className="p-6">
@@ -98,68 +92,53 @@ const BlogPostCard: React.FC<{ post: BlogPost }> = ({ post }) => {
     );
 };
 
-
 // --- Main Page Component ---
 const BlogPage: React.FC = () => {
     const [posts, setPosts] = useState<BlogPost[]>([]);
     const [status, setStatus] = useState<'loading' | 'success' | 'error'>('loading');
 
     const fetchPosts = useCallback(async () => {
-    setStatus("loading");
-    try {
-        const bloggerUrlsString = process.env.NEXT_PUBLIC_BLOGGER_URL || "";
-        const bloggerUrls = bloggerUrlsString.split(",").map(url => url.trim()).filter(Boolean);
+        setStatus("loading");
+        try {
 
-        if (!Array.isArray(bloggerUrls) || bloggerUrls.length === 0) {
-            throw new Error("Blogger URLs are not configured in the environment variable.");
-        }
+            const res = await fetch('/api/blogs');
+            if (!res.ok) {
+                const errorData = await res.json();
+                throw new Error(errorData.error || "Failed to fetch blogs from the server.");
+            }
+            
+            const data = await res.json();
+            const responses = data.blogs;
 
-        const responses = await Promise.all(
-            bloggerUrls.map((url: string) => fetch(url).then(res => {
-                if (!res.ok) throw new Error(`Failed to fetch from ${url}`);
-                return res.json();
-            }))
-        );
+            const allEntries: BloggerEntry[] = responses.flatMap(
+                (blog: BloggerResponse) => blog?.feed?.entry || []
+            );
 
-        // ✅ FIX APPLIED HERE
-        // Define the type for the response object
-        type BloggerResponse = {
-            feed?: {
-                entry?: BloggerEntry[];
-            };
-        };
+            if (allEntries.length === 0) {
+                setPosts([]);
+                setStatus("success");
+                return;
+            }
 
-        // Use the new type instead of 'any'
-        const allEntries: BloggerEntry[] = responses.flatMap(
-            (blog: BloggerResponse) => blog?.feed?.entry || []
-        );
+            const formatted = allEntries.map((entry) => ({
+                id: entry.id.$t.split("-").pop() || "",
+                title: entry.title.$t,
+                link: entry.link.find((l) => l.rel === "alternate")?.href || "#",
+                content: entry.content?.$t || "",
+                published: entry.published.$t,
+            }));
 
-        if (allEntries.length === 0) {
-            setPosts([]);
+            const sortedPosts = formatted.sort(
+                (a, b) => new Date(b.published).getTime() - new Date(a.published).getTime()
+            );
+
+            setPosts(sortedPosts);
             setStatus("success");
-            return;
+        } catch (err) {
+            console.error("Error fetching posts:", err);
+            setStatus("error");
         }
-
-        const formatted = allEntries.map((entry) => ({
-            id: entry.id.$t.split("-").pop() || "",
-            title: entry.title.$t,
-            link: entry.link.find((l) => l.rel === "alternate")?.href || "#",
-            content: entry.content?.$t || "",
-            published: entry.published.$t,
-        }));
-
-        const sortedPosts = formatted.sort(
-            (a, b) => new Date(b.published).getTime() - new Date(a.published).getTime()
-        );
-
-        setPosts(sortedPosts);
-        setStatus("success");
-    } catch (err) {
-        console.error("Error fetching posts:", err);
-        setStatus("error");
-    }
-}, []);
-
+    }, []);
 
     useEffect(() => {
         fetchPosts();
@@ -221,4 +200,3 @@ const BlogPage: React.FC = () => {
 };
 
 export default BlogPage;
-
