@@ -177,13 +177,13 @@ const Navbar = () => {
 
                 <div className="border-t border-slate-200 pt-5 flex flex-col space-y-3">
                   <Link href={settings.place_order_url || '#'} aria-label="Place your order">
-                    <button className="bg-indigo-600 text-white px-4 py-3 rounded-full font-semibold flex items-center justify-center hover:bg-indigo-700 transition">
+                    <button className="bg-indigo-600 text-white w-full px-4 py-3 rounded-full font-semibold flex items-center justify-center hover:bg-indigo-700 transition">
                       <ShoppingCart size={18} className="mr-2" />
                       Place Order
                     </button>
                   </Link>
 
-                  <Link href="/contact" onClick={() => setIsMenuOpen(false)}>
+                  <Link href={`https://wa.me/91${settings.whatsapp_no}`} target="_blank" rel="noopener noreferrer">
                     <button className="bg-green-500 text-white w-full px-4 py-3 rounded-full font-semibold flex items-center justify-center hover:bg-green-600 transition">
                       <MessageCircle size={18} className="mr-2" />
                       Get in Touch
