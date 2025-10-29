@@ -152,7 +152,7 @@ const HomePage = () => {
               },
               {
                 icon: Store,
-                title: 'Available on Pharmerack & Play Store',
+                title: 'Available on Pharmarack & Play Store',
                 subtitle: 'Seamless digital integration.',
               },
             ].map((feature, index) => (
@@ -234,7 +234,7 @@ const HomePage = () => {
         </div>
       </motion.section>
 
-      {/* Section 3: Pharmerack Process */}
+      {/* Section 3: Pharma rack Process */}
       <motion.section
         className="py-16 md:py-24"
         initial="hidden"
@@ -244,7 +244,7 @@ const HomePage = () => {
       >
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-4xl font-bold text-blue-600 mb-3">
-            We&apos;re Available on Pharmerack
+            We&apos;re Available on Pharmarack
           </h2>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto">
             Seamless ordering and tracking through India’s trusted pharma platform.
@@ -254,7 +254,7 @@ const HomePage = () => {
             variants={gridContainerVariants}
           >
             {[
-              { name: 'Login to Pharmerack', icon: 'login.png' },
+              { name: 'Login to Pharmarack', icon: 'login.png' },
               { name: 'Search for "Rounak Pharma"', icon: 'search.png' },
               { name: 'Map to Rounak Pharma', icon: 'mapping.png' },
               { name: 'Place order', icon: 'place-order.png' },

@@ -38,8 +38,8 @@ const TableRowSkeleton = () => (
     <td className="px-6 py-4"><div className="h-5 bg-gray-200 rounded"></div></td>
     <td className="px-6 py-4"><div className="h-5 bg-gray-200 rounded"></div></td>
     <td className="px-6 py-4"><div className="h-5 bg-gray-200 rounded"></div></td>
-    <td className="px-6 py-4"><div className="h-5 bg-gray-200 rounded"></div></td>
-    <td className="px-6 py-4"><div className="h-5 bg-gray-200 rounded"></div></td>
+    {/* <td className="px-6 py-4"><div className="h-5 bg-gray-200 rounded"></div></td>
+    <td className="px-6 py-4"><div className="h-5 bg-gray-200 rounded"></div></td> */}
   </tr>
 );
 
@@ -185,7 +185,7 @@ const ManufacturerPage = () => {
                         <Tag className="inline-block mr-2" size={18}/> Category
                       </div>
                     </th>
-                    <th scope="col" className="px-6 py-3">
+                    {/* <th scope="col" className="px-6 py-3">
                        <div className="relative bg-blue-500 text-white text-base font-bold text-center py-4 px-2 -mt-4 rounded-t-lg shadow-md" style={{clipPath: 'polygon(0 0, 100% 0, 90% 100%, 10% 100%)'}}>
                         <IndianRupee className="inline-block mr-2" size={18}/> MRP (₹)
                       </div>
@@ -194,7 +194,7 @@ const ManufacturerPage = () => {
                        <div className="relative bg-blue-500 text-white text-base font-bold text-center py-4 px-2 -mt-4 rounded-t-lg shadow-md" style={{clipPath: 'polygon(0 0, 100% 0, 90% 100%, 10% 100%)'}}>
                         <Receipt className="inline-block mr-2" size={18}/> PTR (₹)
                       </div>
-                    </th>
+                    </th> */}
                   </tr>
                 </thead>
                 <tbody>
@@ -208,8 +208,8 @@ const ManufacturerPage = () => {
                         <td className="text-center px-6 py-4 font-semibold text-gray-900">{product.name}</td>
                         <td className="text-center px-6 py-4">{product.company}</td>
                         <td className="text-center px-6 py-4">{product.category}</td>
-                        <td className="text-center px-6 py-4">₹{product.mrp}</td>
-                        <td className="text-center px-6 py-4">₹{product.ptr}</td>
+                        {/* <td className="text-center px-6 py-4">₹{product.mrp}</td>
+                        <td className="text-center px-6 py-4">₹{product.ptr}</td> */}
                       </tr> 
                     ))
                   ) : (

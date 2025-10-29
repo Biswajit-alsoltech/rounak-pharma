@@ -5,16 +5,24 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { apiFetch } from '@/lib/api';
 import { ArrowRight } from 'lucide-react';
-import { motion,Variants } from 'framer-motion'; // Import motion
+import { motion, Variants } from 'framer-motion'; 
 
-// --- Type Definitions ---
+
 interface Manufacturer {
-  id: number; // Add an ID for a stable key
+  id: number; 
   m_name: string;
   logo_image: string;
 }
 
-const sectionVariants: Variants = { // ✅ Add : Variants
+interface ManufacturerApiResponse {
+  ma_id?: number;
+  id?: number;
+  m_name: string;
+  logo_image: string;
+}
+
+
+const sectionVariants: Variants = { 
   hidden: { opacity: 0, y: 50 },
   visible: {
     opacity: 1,
@@ -23,7 +31,7 @@ const sectionVariants: Variants = { // ✅ Add : Variants
   },
 };
 
-const gridContainerVariants: Variants = { // ✅ Add : Variants
+const gridContainerVariants: Variants = { 
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
@@ -34,7 +42,7 @@ const gridContainerVariants: Variants = { // ✅ Add : Variants
   },
 };
 
-const gridItemVariants: Variants = { // ✅ Add : Variants
+const gridItemVariants: Variants = {
   hidden: { opacity: 0, y: 20 },
   visible: { opacity: 1, y: 0 },
 };
@@ -44,6 +52,44 @@ const LogoSkeleton = () => (
   <div className="bg-gray-200 h-24 w-full rounded-lg animate-pulse"></div>
 );
 
+// --- NEW Logo Item Component with Fallback ---
+const LogoItem = ({ company }: { company: Manufacturer }) => {
+  const [imageError, setImageError] = useState(false);
+
+  return (
+    <motion.div
+      className="bg-white p-4 rounded-lg shadow-sm border border-gray-100 flex items-center justify-center h-24"
+      variants={gridItemVariants}
+      whileHover={{ scale: 1.05, y: -5, transition: { duration: 0.2 } }}
+    >
+      <div className="relative h-16 w-full">
+        {imageError ? (
+          // Fallback UI: Display company name
+          <div className="w-full h-full flex items-center justify-center text-center text-gray-500 text-sm font-semibold p-2">
+            {company.m_name}
+          </div>
+        ) : (
+          // Next.js Image
+          <Image
+            src={company.logo_image}
+            alt={`${company.m_name} Logo`}
+            fill
+            className="object-contain"
+            sizes="150px"
+            unoptimized
+            onError={() => {
+              console.warn(`Failed to load image: ${company.logo_image}`);
+              setImageError(true);
+            }}
+          />
+        )}
+      </div>
+    </motion.div>
+  );
+};
+
+
+// --- Main FeaturedCompanies Component ---
 const FeaturedCompanies = () => {
   const [companies, setCompanies] = useState<Manufacturer[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -56,7 +102,15 @@ const FeaturedCompanies = () => {
         const response = await apiFetch('/manufactures');
 
         if (response.success && Array.isArray(response.data)) {
-          setCompanies(response.data.slice(0, 6));
+          // Assuming the API response items have a unique 'ma_id' or 'id'
+          // We map it to 'id' for our component's type
+          const formattedData = response.data.map((item: ManufacturerApiResponse) => ({
+            id: item.ma_id || item.id, 
+            m_name: item.m_name,
+            logo_image: item.logo_image,
+          }));
+          setCompanies(formattedData.slice(0, 6));
+
         } else {
           throw new Error('Failed to fetch company data.');
         }
@@ -70,6 +124,14 @@ const FeaturedCompanies = () => {
     };
     fetchFeaturedCompanies();
   }, []);
+
+  // Small update to ensure 'id' is present for the key
+  useEffect(() => {
+    if (!isLoading && companies.length > 0 && companies[0].id === undefined) {
+      console.warn("Company data is missing a unique 'id' or 'ma_id'. Using index as key, but a unique ID is preferred.");
+    }
+  }, [isLoading, companies]);
+
 
   return (
     <motion.section
@@ -99,24 +161,12 @@ const FeaturedCompanies = () => {
             ? <div className="col-span-full text-red-500">
                 <p>Could not load company logos at this time.</p>
               </div>
-            : companies.map((company) => (
-                <motion.div
-                  key={company.id}
-                  className="bg-white p-4 rounded-lg shadow-sm border border-gray-100 flex items-center justify-center h-24"
-                  variants={gridItemVariants}
-                  whileHover={{ scale: 1.05, y: -5, transition: { duration: 0.2 } }}
-                >
-                  <div className="relative h-16 w-full">
-                    <Image
-                      src={company.logo_image}
-                      alt={`${company.m_name} Logo`}
-                      fill
-                      className="object-contain"
-                      sizes="150px"
-                      unoptimized
-                    />
-                  </div>
-                </motion.div>
+            : companies.map((company, index) => (
+                // Use new LogoItem component
+                <LogoItem 
+                  key={company.id !== undefined ? company.id : index} // Use unique ID, fall back to index
+                  company={company} 
+                />
               ))}
         </motion.div>
 
