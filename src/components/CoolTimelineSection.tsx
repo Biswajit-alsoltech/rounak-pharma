@@ -66,7 +66,7 @@ const featureData = [
     },
     {
       icon: Store,
-      title: 'Available on Pharmerack & Play Store',
+      title: 'Available on Pharmarack & Play Store',
       subtitle: 'Seamless digital integration.',
       color: 'text-indigo-500',
       bgColor: 'bg-indigo-100',

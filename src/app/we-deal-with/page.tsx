@@ -7,7 +7,7 @@ import { motion, Variants } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { apiFetch } from "@/lib/api";
-import { Search, AlertTriangle, ArrowRight } from "lucide-react"; // Added ArrowRight
+import { Search, AlertTriangle, ArrowRight } from "lucide-react";
 
 // --- Type Definition ---
 interface Manufacturer {
@@ -18,18 +18,18 @@ interface Manufacturer {
 
 // --- Animation Variants ---
 const sectionVariants: Variants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+  hidden: { opacity: 0, y: 50 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
 };
-  
+
 const gridContainerVariants: Variants = {
-    hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { staggerChildren: 0.05, delayChildren: 0.2 } },
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { staggerChildren: 0.05, delayChildren: 0.2 } },
 };
-  
+
 const gridItemVariants: Variants = {
-    hidden: { opacity: 0, y: 20, scale: 0.95 },
-    visible: { opacity: 1, y: 0, scale: 1 },
+  hidden: { opacity: 0, y: 20, scale: 0.95 },
+  visible: { opacity: 1, y: 0, scale: 1 },
 };
 
 // --- Reusable Skeleton Component ---
@@ -40,7 +40,53 @@ const LogoCardSkeleton = () => (
   </div>
 );
 
+// --- Reusable Logo Card with Fallback ---
+const LogoCard = ({ company }: { company: Manufacturer }) => {
+  const [imageError, setImageError] = useState(false);
 
+  // Get first two letters for fallback
+  const fallbackText = company.m_name ? company.m_name.substring(0, 2).toUpperCase() : '??';
+
+  return (
+    <motion.div variants={gridItemVariants}>
+      <Link href={`/we-deal-with/${company.m_name}`} passHref>
+        <div className="block bg-white p-6 rounded-2xl shadow-md flex flex-col items-center justify-center border-t-4 border-transparent hover:border-blue-500 h-full transition-all duration-300 transform hover:-translate-y-2 cursor-pointer group">
+          
+          {/* Image container with fallback logic */}
+          <div className="relative w-24 h-24 mb-4 transition-transform duration-300 group-hover:scale-110">
+            {imageError ? (
+              // Fallback UI: First two letters
+              <div className="w-full h-full flex items-center justify-center bg-gray-200 text-gray-500 rounded-lg text-3xl font-bold">
+                {fallbackText}
+              </div>
+            ) : (
+              // Next.js Image
+              <Image
+                src={company.logo_image}
+                alt={`${company.m_name} logo`}
+                fill
+                className="object-contain"
+                sizes="(max-width: 768px) 50vw, 20vw"
+                unoptimized
+                onError={() => {
+                  console.warn(`Failed to load image: ${company.logo_image}`);
+                  setImageError(true);
+                }}
+              />
+            )}
+          </div>
+
+          <h3 className="text-gray-800 font-semibold text-lg text-center">
+            {company.m_name}
+          </h3>
+        </div>
+      </Link>
+    </motion.div>
+  );
+};
+
+
+// --- Main Page Component ---
 const WeDealWith = () => {
   const [companies, setCompanies] = useState<Manufacturer[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -135,30 +181,13 @@ const WeDealWith = () => {
                         <p>{error}</p>
                     </div>
                 ) : filteredCompanies.length > 0 ? (
+                    // --- UPDATED to use new LogoCard component ---
                     filteredCompanies.map((company) => (
-                        <motion.div key={company.ma_id} variants={gridItemVariants}>
-                            <Link href={`/we-deal-with/${company.m_name}`} passHref>
-                                <div className="block bg-white p-6 rounded-2xl shadow-md flex flex-col items-center justify-center border-t-4 border-transparent hover:border-blue-500 h-full transition-all duration-300 transform hover:-translate-y-2 cursor-pointer group">
-                                    <div className="relative w-24 h-24 mb-4 transition-transform duration-300 group-hover:scale-110">
-                                        <Image
-                                            src={company.logo_image}
-                                            alt={`${company.m_name} logo`}
-                                            fill
-                                            className="object-contain"
-                                            sizes="(max-width: 768px) 50vw, 20vw"
-                                            unoptimized
-                                        />
-                                    </div>
-                                    <h3 className="text-gray-800 font-semibold text-lg text-center">
-                                        {company.m_name}
-                                    </h3>
-                                </div>
-                            </Link>
-                        </motion.div>
+                      <LogoCard key={company.ma_id} company={company} />
                     ))
                 ) : (
                     <div className="col-span-full text-center text-gray-500 py-16">
-                        <p className="text-xl font-medium">No manufacturers found for {searchTerm}</p>
+                        <p className="text-xl font-medium">No manufacturers found for &quot;{searchTerm}&quot;</p>
                         <p>Try adjusting your search.</p>
                     </div>
                 )}
