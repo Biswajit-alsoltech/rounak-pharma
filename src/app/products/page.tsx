@@ -226,7 +226,7 @@ const AllProductsPage = () => {
                   ) : currentProducts.length > 0 ? (
                     currentProducts.map((product, index) => (
                       <tr key={product.id} className={`border-b border-gray-200 ${index % 2 === 0 ? 'bg-white' : 'bg-blue-50/50'}`}>
-                        <td className="text-left px-6 py-4 font-bold text-gray-900">{product.name}</td>
+                        <td className="text-center px-6 py-4 font-bold text-gray-900">{product.name}</td>
                         <td className="text-center px-6 py-4">{product.company}</td>
                         <td className="text-center px-6 py-4">{product.category}</td>
                         {/* <td className="text-center px-6 py-4">₹{product.mrp}</td>

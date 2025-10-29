@@ -152,7 +152,7 @@ const WeDealWith = () => {
             {/* --- Styled Button --- */}
             <Link href="/products" passHref>
                 <motion.button
-                    className="inline-flex items-center bg-blue-600 text-white font-semibold px-8 py-3 rounded-full shadow-lg hover:bg-blue-700 transition-colors duration-300"
+                    className="inline-flex items-center bg-blue-600 text-white font-semibold px-8 py-3 rounded-full shadow-lg hover:bg-blue-700 transition-colors duration-300 cursor-pointer"
                     whileHover={{ scale: 1.05, y: -2 }}
                     whileTap={{ scale: 0.95 }}
                 >
