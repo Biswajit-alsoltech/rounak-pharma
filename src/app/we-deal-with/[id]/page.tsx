@@ -26,10 +26,10 @@ interface ApiProduct {
   mrp: string | number;
   ptr: string | number;
   qty?: string;
-} 
+}
 
 interface ManufacturerInfo {
-    m_name: string;
+  m_name: string;
 }
 
 // --- Reusable Skeleton Components for Loading State ---
@@ -44,15 +44,15 @@ const TableRowSkeleton = () => (
 );
 
 const CardSkeleton = () => (
-    <div className="bg-white p-4 rounded-lg shadow animate-pulse space-y-3">
+  <div className="bg-white p-4 rounded-lg border border-gray-200 shadow-sm animate-pulse">
+    <div className="flex justify-between items-start space-x-3">
+      <div className="flex-1 space-y-2">
         <div className="h-6 bg-gray-200 rounded w-3/4"></div>
         <div className="h-4 bg-gray-200 rounded w-1/2"></div>
-        <div className="h-4 bg-gray-200 rounded w-1/3"></div>
-        <div className="flex justify-between mt-2 border-t pt-3">
-            <div className="h-5 bg-gray-200 rounded w-1/4"></div>
-            <div className="h-5 bg-gray-200 rounded w-1/4"></div>
-        </div>
+      </div>
+      <div className="h-5 bg-gray-200 rounded-full w-20 mt-1"></div>
     </div>
+  </div>
 );
 
 
@@ -72,7 +72,7 @@ const ManufacturerPage = () => {
   const [itemsPerPage, setItemsPerPage] = useState(10);
 
   useEffect(() => {
-    if (!id) return; 
+    if (!id) return;
 
     const fetchProducts = async () => {
       try {
@@ -91,11 +91,11 @@ const ManufacturerPage = () => {
             qty: p.qty || 'N/A',
           }));
           setProducts(transformedProducts);
-          
+
           if (response.data.length > 0) {
             setManufacturer({ m_name: response.data[0].m_name });
           } else {
-             // You might want a better way to get the name if the product list is empty
+            // You might want a better way to get the name if the product list is empty
             setManufacturer({ m_name: "Selected Manufacturer" });
           }
         } else {
@@ -114,7 +114,7 @@ const ManufacturerPage = () => {
 
   // Reset page to 1 when search term changes
   useEffect(() => {
-      setCurrentPage(1);
+    setCurrentPage(1);
   }, [searchTerm]);
 
   // --- Filtering and Pagination Logic ---
@@ -129,7 +129,7 @@ const ManufacturerPage = () => {
 
   const handlePageChange = (newPage: number) => {
     if (newPage > 0 && newPage <= totalPages) {
-        setCurrentPage(newPage);
+      setCurrentPage(newPage);
     }
   };
 
@@ -144,10 +144,10 @@ const ManufacturerPage = () => {
       <Navbar />
       <section className="bg-gray-100 min-h-screen py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
-          
+
           <header className="mb-8 text-center">
             <h1 className="text-3xl md:text-4xl font-bold text-blue-800">
-                {isLoading ? 'Loading Products...' : `Products by ${manufacturer?.m_name || 'Manufacturer'}`}
+              {isLoading ? 'Loading Products...' : `Products by ${manufacturer?.m_name || 'Manufacturer'}`}
             </h1>
           </header>
 
@@ -163,7 +163,7 @@ const ManufacturerPage = () => {
               className="w-full py-3 pl-12 pr-4 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
-          
+
           <div className="bg-white shadow-lg rounded-xl overflow-hidden">
             {/* Desktop Table View */}
             <div className="hidden md:block overflow-x-auto">
@@ -171,18 +171,18 @@ const ManufacturerPage = () => {
                 <thead className="text-xs text-gray-800 uppercase">
                   <tr className="bg-blue-50">
                     <th scope="col" className="px-6 py-3">
-                      <div className="relative bg-blue-500 text-white text-base font-bold text-center py-4 px-2 -mt-4 rounded-t-lg shadow-md" style={{clipPath: 'polygon(0 0, 100% 0, 90% 100%, 10% 100%)'}}>
-                        <Package className="inline-block mr-2" size={18}/> Product
+                      <div className="relative bg-blue-500 text-white text-base font-bold text-center py-4 px-2 -mt-4 rounded-t-lg shadow-md" style={{ clipPath: 'polygon(0 0, 100% 0, 90% 100%, 10% 100%)' }}>
+                        <Package className="inline-block mr-2" size={18} /> Product
                       </div>
                     </th>
                     <th scope="col" className="px-6 py-3">
-                       <div className="relative bg-blue-500 text-white text-base font-bold text-center py-4 px-2 -mt-4 rounded-t-lg shadow-md" style={{clipPath: 'polygon(0 0, 100% 0, 90% 100%, 10% 100%)'}}>
-                        <Building className="inline-block mr-2" size={18}/> Company
+                      <div className="relative bg-blue-500 text-white text-base font-bold text-center py-4 px-2 -mt-4 rounded-t-lg shadow-md" style={{ clipPath: 'polygon(0 0, 100% 0, 90% 100%, 10% 100%)' }}>
+                        <Building className="inline-block mr-2" size={18} /> Company
                       </div>
                     </th>
                     <th scope="col" className="px-6 py-3">
-                       <div className="relative bg-blue-500 text-white text-base font-bold text-center py-4 px-2 -mt-4 rounded-t-lg shadow-md" style={{clipPath: 'polygon(0 0, 100% 0, 90% 100%, 10% 100%)'}}>
-                        <Tag className="inline-block mr-2" size={18}/> Category
+                      <div className="relative bg-blue-500 text-white text-base font-bold text-center py-4 px-2 -mt-4 rounded-t-lg shadow-md" style={{ clipPath: 'polygon(0 0, 100% 0, 90% 100%, 10% 100%)' }}>
+                        <Tag className="inline-block mr-2" size={18} /> Category
                       </div>
                     </th>
                     {/* <th scope="col" className="px-6 py-3">
@@ -210,7 +210,7 @@ const ManufacturerPage = () => {
                         <td className="text-center px-6 py-4">{product.category}</td>
                         {/* <td className="text-center px-6 py-4">₹{product.mrp}</td>
                         <td className="text-center px-6 py-4">₹{product.ptr}</td> */}
-                      </tr> 
+                      </tr>
                     ))
                   ) : (
                     <tr><td colSpan={5} className="text-center py-10 px-6 text-gray-500">No products found.</td></tr>
@@ -220,77 +220,73 @@ const ManufacturerPage = () => {
             </div>
 
             {/* Mobile Card View */}
-            <div className="md:hidden p-4 space-y-4">
-                 {isLoading ? (
-                    Array.from({ length: itemsPerPage }).map((_, i) => <CardSkeleton key={i} />)
-                  ) : error ? (
-                    <div className="text-center py-10 px-6 text-red-500">{error}</div>
-                  ) : currentProducts.length > 0 ? (
-                    currentProducts.map((product) => (
-                        <div key={product.id} className="bg-white p-4 rounded-lg border border-gray-200 shadow-sm">
-                            <h3 className="font-bold text-lg text-blue-800">{product.name}</h3>
-                            <p className="text-sm text-gray-600 mb-2">{product.company}</p>
-                             <p className="text-sm text-gray-500 mb-3">
-                                <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-xs font-semibold text-gray-700 mr-2">
-                                    {product.category}
-                                </span>
-                            </p>
-                            <div className="flex justify-between items-center border-t pt-3 mt-3">
-                                <div className="text-center">
-                                    <p className="text-xs text-gray-500 font-semibold">MRP</p>
-                                    <p className="font-bold text-green-700">₹{product.mrp}</p>
-                                </div>
-                               <div className="text-center">
-                                    <p className="text-xs text-gray-500 font-semibold">PTR</p>
-                                    <p className="font-bold text-green-700">₹{product.ptr}</p>
-                                </div>
-                            </div>
-                        </div>
-                    ))
-                  ) : (
-                    <div className="text-center py-10 px-6 text-gray-500">No products found.</div>
-                  )}
-            </div>
-            
+          <div className="md:hidden p-4 space-y-4">
+            {isLoading ? (
+              Array.from({ length: itemsPerPage }).map((_, i) => <CardSkeleton key={i} />)
+            ) : error ? (
+              <div className="text-center py-10 px-6 text-red-500">{error}</div>
+            ) : currentProducts.length > 0 ? (
+              currentProducts.map((product) => (
+                <div key={product.id} className="bg-white p-4 rounded-lg border border-gray-200 shadow-sm">
+                  <div className="flex justify-between items-start space-x-3">
+                    <div className="flex-1 min-w-0">
+                      <h3 className="font-bold text-lg text-blue-800 truncate" title={product.name}>
+                        {product.name}
+                      </h3>
+                      <p className="text-sm text-gray-600 truncate" title={product.company}>
+                        {product.company}
+                      </p>
+                    </div>
+                    <span className="inline-block bg-blue-100 rounded-full px-3 py-1 text-xs font-semibold text-blue-800 whitespace-nowrap mt-1">
+                      {product.category}
+                    </span>
+                  </div>
+                </div>
+              ))
+            ) : (
+              <div className="text-center py-10 px-6 text-gray-500">No products found.</div>
+            )}
+          </div>
+
             {/* Pagination Controls */}
             {!isLoading && !error && filteredProducts.length > 0 && (
-                <div className="flex flex-col md:flex-row items-center justify-between px-6 py-4 border-t">
-                    <div className="flex items-center mb-4 md:mb-0">
-                        <span className="text-sm text-gray-700 mr-2">Rows per page:</span>
-                        <select
-                            value={itemsPerPage}
-                            onChange={handleItemsPerPageChange}
-                            className="border border-gray-300 rounded-md px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        >
-                            <option value={10}>10</option>
-                            <option value={25}>25</option>
-                            <option value={50}>50</option>
-                        </select>
-                    </div>
-                    <div className="flex items-center">
-                        <span className="text-sm text-gray-700 mr-4">
-                            Page {currentPage} of {totalPages}
-                        </span>
-                        <div className="flex items-center space-x-2">
-                            <button
-                                onClick={() => handlePageChange(currentPage - 1)}
-                                disabled={currentPage === 1}
-                                className="p-2 rounded-md bg-white border border-gray-300 text-gray-600 hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed"
-                                aria-label="Previous Page"
-                            >
-                                <ChevronLeft size={16} />
-                            </button>
-                            <button
-                                onClick={() => handlePageChange(currentPage + 1)}
-                                disabled={currentPage === totalPages}
-                                className="p-2 rounded-md bg-white border border-gray-300 text-gray-600 hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed"
-                                aria-label="Next Page"
-                            >
-                                <ChevronRight size={16} />
-                            </button>
-                        </div>
-                    </div>
+              <div className="flex flex-col md:flex-row items-center justify-between px-6 py-4 border-t">
+                <div className="flex items-center mb-4 md:mb-0">
+                  <span className="text-sm text-gray-700 mr-2">Rows per page:</span>
+                  <select
+                    value={itemsPerPage}
+                    onChange={handleItemsPerPageChange}
+                    className="border border-gray-300 rounded-md px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  >
+                    <option value={10}>10</option>
+                    <option value={25}>25</option>
+                    <option value={50}>50</option>
+                  </select>
                 </div>
+                <div className="flex items-center">
+                  <span className="text-sm text-gray-700 mr-4">
+                    Page {currentPage} of {totalPages}
+                  </span>
+                  <div className="flex items-center space-x-2">
+                    <button
+                      onClick={() => handlePageChange(currentPage - 1)}
+                      disabled={currentPage === 1}
+                      className="p-2 rounded-md bg-white border border-gray-300 text-gray-600 hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed"
+                      aria-label="Previous Page"
+                    >
+                      <ChevronLeft size={16} />
+                    </button>
+                    <button
+                      onClick={() => handlePageChange(currentPage + 1)}
+                      disabled={currentPage === totalPages}
+                      className="p-2 rounded-md bg-white border border-gray-300 text-gray-600 hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed"
+                      aria-label="Next Page"
+                    >
+                      <ChevronRight size={16} />
+                    </button>
+                  </div>
+                </div>
+              </div>
             )}
           </div>
         </div>

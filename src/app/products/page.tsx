@@ -39,13 +39,13 @@ const TableRowSkeleton = () => (
 );
 
 const CardSkeleton = () => (
-  <div className="bg-white p-4 rounded-lg shadow animate-pulse space-y-3">
-    <div className="h-6 bg-gray-200 rounded w-3/4"></div>
-    <div className="h-4 bg-gray-200 rounded w-1/2"></div>
-    <div className="h-4 bg-gray-200 rounded w-1/3"></div>
-    <div className="flex justify-between mt-2 border-t pt-3">
-      <div className="h-5 bg-gray-200 rounded w-1/4"></div>
-      <div className="h-5 bg-gray-200 rounded w-1/4"></div>
+  <div className="bg-white p-4 rounded-lg border border-gray-200 shadow-sm animate-pulse">
+    <div className="flex justify-between items-start space-x-3">
+      <div className="flex-1 space-y-2">
+        <div className="h-6 bg-gray-200 rounded w-3/4"></div>
+        <div className="h-4 bg-gray-200 rounded w-1/2"></div>
+      </div>
+      <div className="h-5 bg-gray-200 rounded-full w-20 mt-1"></div>
     </div>
   </div>
 );
@@ -241,37 +241,34 @@ const AllProductsPage = () => {
             </div>
 
             {/* Mobile Card View */}
-            <div className="md:hidden p-4 space-y-4">
-              {isLoading ? (
-                Array.from({ length: itemsPerPage }).map((_, i) => <CardSkeleton key={i} />)
-              ) : error ? (
-                <div className="text-center py-10 px-6 text-red-500">{error}</div>
-              ) : currentProducts.length > 0 ? (
-                currentProducts.map((product) => (
-                  <div key={product.id} className="bg-white p-4 rounded-lg border border-gray-200 shadow-sm">
-                    <h3 className="font-bold text-lg text-blue-800">{product.name}</h3>
-                    <p className="text-sm text-gray-600 mb-2">{product.company}</p>
-                    <p className="text-sm text-gray-500 mb-3">
-                      <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-xs font-semibold text-gray-700 mr-2">
-                        {product.category}
-                      </span>
-                    </p>
-                    <div className="flex justify-between items-center border-t pt-3 mt-3">
-                      <div className="text-center">
-                        <p className="text-xs text-gray-500 font-semibold">MRP</p>
-                        <p className="font-bold text-green-700">₹{product.mrp}</p>
-                      </div>
-                      <div className="text-center">
-                        <p className="text-xs text-gray-500 font-semibold">PTR</p>
-                        <p className="font-bold text-green-700">₹{product.ptr}</p>
-                      </div>
+            {/* Mobile Card View */}
+          <div className="md:hidden p-4 space-y-4">
+            {isLoading ? (
+              Array.from({ length: itemsPerPage }).map((_, i) => <CardSkeleton key={i} />)
+            ) : error ? (
+              <div className="text-center py-10 px-6 text-red-500">{error}</div>
+            ) : currentProducts.length > 0 ? (
+              currentProducts.map((product) => (
+                <div key={product.id} className="bg-white p-4 rounded-lg border border-gray-200 shadow-sm">
+                  <div className="flex justify-between items-start space-x-3">
+                    <div className="flex-1 min-w-0">
+                      <h3 className="font-bold text-lg text-blue-800 truncate" title={product.name}>
+                        {product.name}
+                      </h3>
+                      <p className="text-sm text-gray-600 truncate" title={product.company}>
+                        {product.company}
+                      </p>
                     </div>
+                    <span className="inline-block bg-blue-100 rounded-full px-3 py-1 text-xs font-semibold text-blue-800 whitespace-nowrap mt-1">
+                      {product.category}
+                    </span>
                   </div>
-                ))
-              ) : (
-                <div className="text-center py-10 px-6 text-gray-500">No products found for the current filters.</div>
-              )}
-            </div>
+                </div>
+              ))
+            ) : (
+              <div className="text-center py-10 px-6 text-gray-500">No products found.</div>
+            )}
+          </div>
 
             {/* Pagination Controls */}
             {!isLoading && !error && products.length > 0 && (
