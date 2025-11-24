@@ -1,8 +1,9 @@
 import { NextResponse } from "next/server";
+import { BLOGGER_URL } from "@/lib/constant";
 
 export async function GET() {
   try {
-    const bloggerUrlsString = process.env.NEXT_PUBLIC_BLOGGER_URL || "";
+    const bloggerUrlsString = BLOGGER_URL || "";
     const bloggerUrls = bloggerUrlsString
       .split(",")
       .map((url) => url.trim())

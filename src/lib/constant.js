@@ -1,0 +1,1 @@
+export const BLOGGER_URL = "https://tejaspharma.blogspot.com/feeds/posts/default?alt=json,https://tejaspharma1.blogspot.com/feeds/posts/default?alt=json,https://support-rounakpharma.blogspot.com/feeds/posts/default?alt=json";
