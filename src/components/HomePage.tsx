@@ -176,7 +176,7 @@ const HomePage = () => {
 
       {/* Section 2: We Serve (Dynamic) */}
       <motion.section
-        className="relative bg-gray-50 py-16 md:py-24"
+        className="relative bg-gray-50 py-10 md:py-10"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}
@@ -191,7 +191,7 @@ const HomePage = () => {
           />
         </div>
         <div className="container mx-auto px-4 text-center relative z-10">
-          <h2 className="text-4xl font-bold text-gray-800 mb-12">We Serve</h2>
+          <h2 className="text-4xl font-bold text-gray-800">We Serve</h2>
           <motion.div
             className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 max-w-5xl mx-auto"
             variants={gridContainerVariants}
@@ -236,21 +236,21 @@ const HomePage = () => {
 
       {/* Section 3: Pharma rack Process */}
       <motion.section
-        className="py-16 md:py-24"
+        className="py-10 md:py-10"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}
         variants={sectionVariants}
       >
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-4xl font-bold text-blue-600 mb-3">
+          <h2 className="text-3xl font-bold text-blue-600 mb-3">
             We&apos;re Available on Pharmarack
           </h2>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto">
             Seamless ordering and tracking through India’s trusted pharma platform.
           </p>
           <motion.div
-            className="mt-16 flex flex-col md:flex-row items-center justify-center flex-wrap gap-y-8 md:gap-x-4 lg:gap-x-8"
+            className="mt-8 flex flex-col md:flex-row items-center justify-center flex-wrap gap-y-8 md:gap-x-4 lg:gap-x-8"
             variants={gridContainerVariants}
           >
             {[

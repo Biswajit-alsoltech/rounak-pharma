@@ -113,14 +113,14 @@ const HeroSection = () => {
   }
 
   const activeBanners = banners.length > 0 ? banners : fallbackBanners;
-// text sujit
+
   return (
     <section className="w-full relative overflow-hidden" ref={emblaRef}>
       <div className="flex">
         {activeBanners.map((banner) => (
           <div
             key={banner.id}
-            className="relative flex-[0_0_100%] h-[60vh] md:h-[85vh] flex items-center justify-start text-white"
+            className="relative flex-[0_0_100%] h-[40vh] md:h-[45vh] flex items-center justify-start text-white"
           >
             <Image
               src={banner.image_url}
@@ -139,7 +139,7 @@ const HeroSection = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
             >
-              <h1 className="text-4xl md:text-6xl font-extrabold mb-4 drop-shadow-lg leading-tight">
+              <h1 className="text-3xl md:text-4xl font-extrabold mb-4 drop-shadow-lg leading-tight">
                 {banner.title}
               </h1>
               {banner.subtitle && (

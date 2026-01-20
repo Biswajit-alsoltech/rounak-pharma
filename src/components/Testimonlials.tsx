@@ -145,7 +145,7 @@ const UpgradedTestimonials = () => {
 
   return (
     <motion.section
-      className="bg-slate-50 py-20 md:py-28 overflow-hidden"
+      className="bg-slate-50 py-20 md:py-20 overflow-hidden"
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.2 }}

@@ -71,7 +71,7 @@ const Footer = () => {
 
   return (
     <footer className="bg-slate-100 w-full text-slate-600">
-      <div className="container mx-auto px-6 md:px-8 pt-16 pb-12">
+      <div className="container mx-auto px-6 md:px-8 pt-8 pb-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
 
           {/* Column 1: Company Info & Socials */}
@@ -119,7 +119,7 @@ const Footer = () => {
             <ul className="space-y-2">
               {quickLinks.map((link) => (
                 <li key={link.name}>
-                  <Link href={link.href} className="hover:text-indigo-600 hover:underline transition-colors">
+                  <Link href={link.href} className="hover:text-indigo-600 transition-colors">
                     {link.name}
                   </Link>
                 </li>
@@ -133,7 +133,7 @@ const Footer = () => {
             <ul className="space-y-2">
               {legalLinks.map((link) => (
                 <li key={link.name}>
-                  <Link href={link.href} className="hover:text-indigo-600 hover:underline transition-colors">
+                  <Link href={link.href} className="hover:text-indigo-600 transition-colors">
                     {link.name}
                   </Link>
                 </li>

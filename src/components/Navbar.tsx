@@ -64,7 +64,7 @@ const Navbar = () => {
   return (
     <header className="w-full bg-white shadow-md border-b border-gray-100 sticky top-0 z-50">
       {/* === Top Contact Bar === */}
-      <div className="bg-slate-700 text-white text-xs md:text-sm py-2 px-4 md:px-8">
+      <div className="bg-green-800 text-white text-xs md:text-sm py-2 px-4 md:px-8">
         <div className="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-2">
           <div className="flex items-center space-x-4">
             {isLoading ? (
@@ -103,7 +103,7 @@ const Navbar = () => {
       </div>
 
       {/* === Main Navigation === */}
-      <nav className="max-w-7xl mx-auto px-4 md:px-8 py-4 relative">
+      <nav className="max-w-7xl mx-auto px-2 md:px-8 py-1 relative">
         <div className="flex justify-between items-center">
           {/* Logo */}
           <Link href="/" className="flex-shrink-0">
@@ -118,9 +118,9 @@ const Navbar = () => {
           </Link>
 
           {/* Desktop Navigation Links */}
-          <div className="hidden lg:flex items-center space-x-8 text-slate-700 font-medium">
+          <div className="hidden lg:flex items-center text-slate-700 font-medium">
             {navLinks.map(link => (
-              <Link key={link.name} href={link.href} className="hover:text-indigo-600 transition-colors">
+              <Link key={link.name} href={link.href} className="hover:border-b border-green-800 transition px-4 py-1 ">
                 {link.name}
               </Link>
             ))}
@@ -135,7 +135,7 @@ const Navbar = () => {
             </button>
             </Link>
             <Link href={`https://wa.me/91${settings.whatsapp_no}`} target="_blank" rel="noopener noreferrer">
-              <button className="bg-green-500 text-white px-4 py-2 rounded-full font-semibold flex items-center hover:bg-green-600 transition cursor-pointer">
+              <button className="bg-green-600 text-white px-4 py-2 rounded-full font-semibold flex items-center hover:bg-green-800 transition cursor-pointer">
                 <MessageCircle size={18} className="mr-2" />
                 Get in Touch
               </button>
@@ -164,12 +164,12 @@ const Navbar = () => {
               transition={{ duration: 0.3, ease: 'easeInOut' }}
               className="lg:hidden absolute top-full left-0 right-0 bg-white shadow-xl mt-2 rounded-b-lg p-6 border-t border-slate-100"
             >
-              <nav className="flex flex-col space-y-5">
+              <nav className="flex flex-col">
                 {navLinks.map(link => (
                   <Link
                     key={link.href}
                     href={link.href}
-                    className="text-slate-700 font-medium text-lg hover:text-indigo-600 transition-colors"
+                    className="text-slate-700 border-t border-slate-200 p-2 bg-blue-50 font-medium text-lg hover:text-green-800 hover:bg-slate-200 transition-colors"
                     onClick={() => setIsMenuOpen(false)}
                   >
                     {link.name}

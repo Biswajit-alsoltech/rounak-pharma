@@ -78,19 +78,19 @@ const featureData = [
 const CompactFeatureSection = () => {
   return (
     <motion.section
-      className="container mx-auto px-4 py-16 md:py-20 " // UPDATED: Reduced vertical padding
+      className="container mx-auto px-4 py-10 md:py-10 " // UPDATED: Reduced vertical padding
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.2 }}
     >
-      <div className="text-center mb-12"> {/* UPDATED: Reduced margin-bottom */}
+      <div className="text-center mb-8"> {/* UPDATED: Reduced margin-bottom */}
           <h2 className="text-2xl md:text-3xl font-bold text-slate-900">Our Growth Journey</h2> {/* UPDATED: Scaled down text */}
           <p className="mt-2 text-base text-slate-600 max-w-2xl mx-auto"> {/* UPDATED: Scaled down text */}
               From humble beginnings to a trusted partner in the pharmaceutical supply chain.
           </p>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center"> {/* UPDATED: Reduced gap */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 "> {/* UPDATED: Reduced gap */}
         
         {/* Left Side: Image */}
         <motion.div variants={imageVariants} className="flex justify-center items-center">
@@ -98,8 +98,8 @@ const CompactFeatureSection = () => {
             <Image
               src="/images/rounak-style.jpg"
               alt="Rounak Pharma Innovation"
-              width={450} // UPDATED: Reduced image width
-              height={300} // UPDATED: Reduced image height
+              width={550} // UPDATED: Reduced image width
+              height={400} // UPDATED: Reduced image height
               className="rounded-2xl"
               priority
             />
@@ -109,7 +109,7 @@ const CompactFeatureSection = () => {
         {/* Right Side: Indented Stacked Cards */}
         <motion.div
           variants={containerVariants}
-          className="relative flex flex-col gap-8" // UPDATED: Reduced gap between cards
+          className="relative flex flex-col gap-6" // UPDATED: Reduced gap between cards
         >
             <div className="absolute top-6 bottom-6 left-1/2 -translate-x-1/2 w-0.5 bg-blue-100 hidden lg:block rounded-full z-0"></div>
 
@@ -123,7 +123,7 @@ const CompactFeatureSection = () => {
                 >
                     <div
                     className={`
-                        bg-white/70 backdrop-blur-sm rounded-xl shadow-lg p-5 // UPDATED: Reduced padding
+                        bg-gray-50 backdrop-blur-sm rounded-xl shadow-lg p-5 // UPDATED: Reduced padding
                         hover:shadow-indigo-100 hover:bg-white
                         transition-all duration-300 ease-in-out
                         flex items-center gap-5 w-full max-w-md // UPDATED: Reduced gap
