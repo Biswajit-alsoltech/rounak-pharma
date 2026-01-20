@@ -113,7 +113,7 @@ const HeroSection = () => {
   }
 
   const activeBanners = banners.length > 0 ? banners : fallbackBanners;
-
+// text sujit
   return (
     <section className="w-full relative overflow-hidden" ref={emblaRef}>
       <div className="flex">
