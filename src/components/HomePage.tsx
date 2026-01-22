@@ -176,13 +176,13 @@ const HomePage = () => {
 
       {/* Section 2: We Serve (Dynamic) */}
       <motion.section
-        className="relative bg-gray-50 py-10 md:py-10"
+        className="relative bg-gray-50 py-6 md:py-6"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}
         variants={sectionVariants}
       >
-        <div className="absolute inset-0 opacity-5 pointer-events-none">
+        <div className="absolute inset-0 opacity-3 pointer-events-none">
           <Image
             src="/images/medicine-background.jpg"
             alt="Medicine Background"
@@ -190,8 +190,8 @@ const HomePage = () => {
             className="object-cover"
           />
         </div>
-        <div className="container mx-auto px-4 text-center relative z-10">
-          <h2 className="text-4xl font-bold text-gray-800">We Serve</h2>
+        <div className="container mx-auto px-4 pb-4 text-center relative z-10">
+          <h2 className="text-4xl font-bold pb-4 text-gray-800">We Serve</h2>
           <motion.div
             className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 max-w-5xl mx-auto"
             variants={gridContainerVariants}
@@ -256,23 +256,23 @@ const HomePage = () => {
             {[
               { name: 'Login to Pharmarack', icon: 'login.png' },
               { name: 'Search for "Rounak Pharma"', icon: 'search.png' },
-              { name: 'Map to Rounak Pharma', icon: 'mapping.png' },
-              { name: 'Place order', icon: 'place-order.png' },
+              { name: 'Map to Rounak Pharma', icon: 'map.png' },
+              { name: 'Place order', icon: 'placeorder.png' },
               { name: 'Delivery', icon: 'delivery.png' },
               
             ].map((step, index, arr) => (
               <React.Fragment key={step.name}>
                 <motion.div
-                  className="flex flex-col items-center w-40 text-center"
+                  className="flex flex-col items-center w-50 text-center"
                   variants={gridItemVariants}
                 >
                   <Image
                     src={`/images/process_new/${step.icon}`}
                     alt={step.name}
-                    width={120}
-                    height={120}
+                    width={160}
+                    height={160}
                   />
-                  <p className="mt-3 font-medium text-gray-700">{step.name}</p>
+                  {/* <p className="mt-3 font-medium text-gray-700">{step.name}</p> */}
                 </motion.div>
                 {index < arr.length - 1 && (
                   <motion.div variants={gridItemVariants}>
@@ -282,7 +282,7 @@ const HomePage = () => {
               </React.Fragment>
             ))}
           </motion.div>
-          <div className="mt-12">
+          <div className="mt-8">
           <Link href={`${settings.connect_now_url}`} passHref>
             <motion.a
               className="inline-flex items-center bg-blue-600 text-white font-semibold px-8 py-3 rounded-lg shadow-md hover:bg-blue-700 transition-all duration-300"

@@ -43,7 +43,7 @@ const itemVariants: Variants = {
 // --- Reusable Components (No Changes) ---
 const TestimonialCard = ({ name, designation, message, rating, image_url }: Testimonial) => (
   <motion.div
-    className="bg-white p-6 rounded-xl shadow-lg flex-shrink-0 w-80 sm:w-96 flex flex-col text-left min-h-[300px]"
+    className="bg-green-100 p-6 rounded-xl shadow-lg flex-shrink-0 w-80 sm:w-96 flex flex-col text-left min-h-[300px]"
     whileHover={{ y: -8, transition: { duration: 0.2 } }}
   >
     <div className="flex-grow">
@@ -60,16 +60,16 @@ const TestimonialCard = ({ name, designation, message, rating, image_url }: Test
       </div>
       <p className="text-slate-600 text-[15px] leading-relaxed line-clamp-6">&quot;{message}&quot;</p>
     </div>
-    <div className="flex mt-4 pt-4 border-t border-slate-100">
+    <div className="flex mt-4 pt-4 border-t border-green-500">
       {Array.from({ length: 5 }).map((_, i) => (
-        <Star key={i} className={`w-5 h-5 ${i < rating ? "text-yellow-400" : "text-slate-300"} fill-current`} />
+        <Star key={i} className={`w-5 h-5 ${i < rating ? "text-green-500" : "text-slate-300"} fill-current`} />
       ))}
     </div>
   </motion.div>
 );
 
 const TestimonialCardSkeleton = () => (
-    <div className="bg-white p-6 rounded-xl shadow-lg flex-shrink-0 w-80 sm:w-96 min-h-[300px] animate-pulse">
+    <div className="bg-green-100 p-6 rounded-xl shadow-lg flex-shrink-0 w-80 sm:w-96 min-h-[300px] animate-pulse">
         <div className="flex items-center mb-4">
             <div className="w-12 h-12 rounded-full bg-slate-200 mr-4"></div>
             <div className="flex-grow">
@@ -145,15 +145,15 @@ const UpgradedTestimonials = () => {
 
   return (
     <motion.section
-      className="bg-slate-50 py-20 md:py-20 overflow-hidden"
+      className="py-10 md:py-10 overflow-hidden"
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.2 }}
       variants={sectionVariants}
     >
       <div className="container mx-auto px-4">
-        <motion.div variants={itemVariants} className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-indigo-600">
+        <motion.div variants={itemVariants} className="text-center mb-8">
+          <h2 className="text-3xl md:text-4xl font-bold text-green-800">
             Trusted by Our Partners
           </h2>
           <p className="mt-3 text-lg text-slate-600 max-w-2xl mx-auto">
@@ -188,7 +188,7 @@ const UpgradedTestimonials = () => {
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.9 }}
                 >
-                    <ArrowLeft className="w-6 h-6 text-indigo-600" />
+                    <ArrowLeft className="w-6 h-6 text-green-500" />
                 </motion.button>
                 <motion.button
                     onClick={() => handleScroll('right')}
@@ -198,7 +198,7 @@ const UpgradedTestimonials = () => {
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.9 }}
                 >
-                    <ArrowRight className="w-6 h-6 text-indigo-600" />
+                    <ArrowRight className="w-6 h-6 text-green-500" />
                 </motion.button>
           </div>
 
@@ -207,18 +207,18 @@ const UpgradedTestimonials = () => {
         {/* --- Redesigned CTA Banner --- */}
         <motion.div
           variants={itemVariants}
-          className="mt-24 relative bg-gradient-to-r from-indigo-600 to-indigo-700 text-white rounded-2xl shadow-2xl p-8 md:p-12 flex items-center"
+          className="mt-12 relative bg-gradient-to-r from-green-800 to-green-500 text-white rounded-2xl shadow-2xl p-8 md:p-12 flex items-center"
         >
             <div className="relative z-10 md:w-3/5">
                 <h3 className="text-3xl md:text-4xl font-bold mb-3">
                     Download Our App
                 </h3>
-                <p className="text-lg md:text-xl text-indigo-200 mb-6">
+                <p className="text-lg md:text-xl text-green-200 mb-6">
                     Available on Play Store & Live Connect for seamless access.
                 </p>
                 <Link href={isSettingsLoading ? '#' : settings.play_store_link || '#'} target="_blank" rel="noopener noreferrer">
                 <motion.button
-                  className="bg-white text-indigo-600 font-semibold px-6 py-3 rounded-lg shadow-md flex items-center gap-2 disabled:opacity-70"
+                  className="bg-white text-green-600 font-semibold px-6 py-3 rounded-lg shadow-md flex items-center gap-2 disabled:opacity-70"
                   whileHover={{ scale: 1.05, y: -2 }}
                   whileTap={{ scale: 0.95 }}
                   disabled={isSettingsLoading}

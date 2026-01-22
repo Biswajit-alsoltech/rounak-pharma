@@ -102,7 +102,7 @@ const Footer = () => {
                       href={url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="bg-white text-slate-500 p-2 rounded-full hover:bg-indigo-600 hover:text-white transition-colors duration-300 shadow-sm"
+                      className="bg-white text-green-500 p-2 rounded-full hover:bg-green-500 hover:text-white transition-colors duration-300 shadow-sm"
                       aria-label={social.name}
                     >
                       <social.icon size={20} />
@@ -115,11 +115,11 @@ const Footer = () => {
           
           {/* Column 2: Quick Links */}
           <div>
-            <h3 className="font-bold text-lg mb-4 text-slate-800">Quick Links</h3>
-            <ul className="space-y-2">
+            <h3 className="font-bold text-lg mb-4 text-slate-800 border-b-2 border-slate-200">Quick Links</h3>
+            <ul className="space-y-2 text-sm">
               {quickLinks.map((link) => (
-                <li key={link.name}>
-                  <Link href={link.href} className="hover:text-indigo-600 transition-colors">
+                <li key={link.name} className='border-b border-slate-200 pb-2'>
+                  <Link href={link.href} className="hover:text-green-500 transition-colors">
                     {link.name}
                   </Link>
                 </li>
@@ -129,11 +129,11 @@ const Footer = () => {
 
           {/* Column 3: Legal */}
           <div>
-            <h3 className="font-bold text-lg mb-4 text-slate-800">Legal</h3>
-            <ul className="space-y-2">
+            <h3 className="font-bold text-lg mb-4 text-slate-800 border-b-2 border-slate-200">Legal</h3>
+            <ul className="space-y-2 text-sm">
               {legalLinks.map((link) => (
-                <li key={link.name}>
-                  <Link href={link.href} className="hover:text-indigo-600 transition-colors">
+                <li key={link.name} className='border-b border-slate-200 pb-2'>
+                  <Link href={link.href} className="hover:text-green-500 transition-colors">
                     {link.name}
                   </Link>
                 </li>
@@ -143,7 +143,7 @@ const Footer = () => {
 
           {/* Column 4: Contact Us */}
           <div>
-            <h3 className="font-bold text-lg mb-4 text-slate-800">Contact Us</h3>
+            <h3 className="font-bold text-lg mb-4 text-slate-800 border-b-2 border-slate-200">Contact Us</h3>
             {isLoading ? (
               <div className="space-y-4 animate-pulse">
                 <div className="h-6 w-48 bg-slate-200 rounded-md"></div>
@@ -152,17 +152,17 @@ const Footer = () => {
             ) : (
               <ul className="space-y-4">
                 {settings.whatsapp_no && (
-                   <li className="flex items-start space-x-3">
-                     <Phone size={18} className="mt-1 text-indigo-500 flex-shrink-0" />
-                     <a href={`tel:+91${settings.whatsapp_no}`} className="hover:text-indigo-600">
+                   <li className="flex items-start space-x-3 border-b border-slate-200 pb-2 text-sm">
+                     <Phone size={18} className="mt-1 text-green-500 flex-shrink-0" />
+                     <a href={`tel:+91${settings.whatsapp_no}`} className="hover:text-green-500">
                         +91 {settings.whatsapp_no}
                      </a>
                    </li>
                 )}
                 {/* Static Email - can be made dynamic if added to API */}
-                <li className="flex items-start space-x-3">
-                  <Mail size={18} className="mt-1 text-indigo-500 flex-shrink-0" />
-                  <a href={`mailto:${settings.email}`} className="hover:text-indigo-600">
+                <li className="flex items-start space-x-3 border-b border-slate-200 pb-2 text-sm">
+                  <Mail size={18} className="mt-1 text-green-500 flex-shrink-0" />
+                  <a href={`mailto:${settings.email}`} className="hover:text-green-500">
                     {settings.email}
                   </a>
                 </li>
@@ -174,12 +174,12 @@ const Footer = () => {
       </div>
 
       {/* --- Bottom Bar --- */}
-      <div className="border-t border-slate-200">
+      <div className="border-t border-slate-200 bg-white">
           <div className="container mx-auto px-6 md:px-8 py-4 flex flex-col sm:flex-row justify-between items-center text-sm">
               <p>&copy; {new Date().getFullYear()} Rounak Pharma. All Rights Reserved.</p>
               <button 
                 onClick={scrollToTop} 
-                className="mt-4 sm:mt-0 flex items-center gap-2 hover:text-indigo-600 transition-colors"
+                className="mt-4 sm:mt-0 flex items-center gap-2 hover:text-green-500 transition-colors"
                 aria-label="Back to top"
               >
                 Back to Top <ArrowUp size={16} />

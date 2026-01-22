@@ -120,7 +120,7 @@ const HeroSection = () => {
         {activeBanners.map((banner) => (
           <div
             key={banner.id}
-            className="relative flex-[0_0_100%] h-[40vh] md:h-[45vh] flex items-center justify-start text-white"
+            className="relative flex-[0_0_100%] h-[45vh] md:h-[64vh] flex items-center justify-start text-white"
           >
             <Image
               src={banner.image_url}
@@ -130,7 +130,7 @@ const HeroSection = () => {
               priority={banner.id === activeBanners[0]?.id}
             />
             {/* UPDATED: Gradient overlay for better text readability */}
-            <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-black/30"></div>
+            <div className="absolute inset-0"></div>
             
             <motion.div
               key={banner.id} // Animate content when banner ID changes
