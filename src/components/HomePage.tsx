@@ -182,7 +182,7 @@ const HomePage = () => {
         viewport={{ once: true, amount: 0.2 }}
         variants={sectionVariants}
       >
-        <div className="absolute inset-0 opacity-3 pointer-events-none">
+        <div className="absolute inset-0 pointer-events-none">
           <Image
             src="/images/medicine-background.jpg"
             alt="Medicine Background"

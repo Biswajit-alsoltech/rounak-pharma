@@ -207,35 +207,40 @@ const UpgradedTestimonials = () => {
         {/* --- Redesigned CTA Banner --- */}
         <motion.div
           variants={itemVariants}
-          className="mt-12 relative bg-gradient-to-r from-green-800 to-green-500 text-white rounded-2xl shadow-2xl p-8 md:p-12 flex items-center"
+          className="mt-12 bg-gradient-to-r from-green-800 to-green-500 text-white rounded-2xl shadow-2xl px-4 md:px-8 flex flex-wrap items-center"
         >
-            <div className="relative z-10 md:w-3/5">
-                <h3 className="text-3xl md:text-4xl font-bold mb-3">
-                    Download Our App
-                </h3>
-                <p className="text-lg md:text-xl text-green-200 mb-6">
-                    Available on Play Store & Live Connect for seamless access.
-                </p>
-                <Link href={isSettingsLoading ? '#' : settings.play_store_link || '#'} target="_blank" rel="noopener noreferrer">
-                <motion.button
-                  className="bg-white text-green-600 font-semibold px-6 py-3 rounded-lg shadow-md flex items-center gap-2 disabled:opacity-70"
-                  whileHover={{ scale: 1.05, y: -2 }}
-                  whileTap={{ scale: 0.95 }}
-                  disabled={isSettingsLoading}
-                >
-                  <Download className="w-5 h-5" />
-                  Download Now
-                </motion.button>
-                </Link>
-            </div>
-            <div className="absolute bottom-0 right-0 h-48 w-48 md:h-64 md:w-64 lg:h-72 lg:w-72 opacity-80 lg:opacity-100">
+            <div className="col">
+              <div className="relative bottom-0 left-0 h-48 w-48 md:h-64 md:w-64 lg:h-64 lg:w-72 opacity-80 lg:opacity-100">
                 <Image
                     src="/images/download.png"
                     alt="Rounak Pharma app on a phone"
                     fill
                     className="object-contain"
                 />
+              </div>
             </div>
+            <div className="col md:w-3/5">
+              <div className="mb-5 mx-5">
+                  <h3 className="text-3xl md:text-4xl font-bold mb-3">
+                      Download Our App
+                  </h3>
+                  <p className="text-lg md:text-xl text-green-200 mb-6">
+                      Available on Play Store & Live Connect for seamless access.
+                  </p>
+                  <Link href={isSettingsLoading ? '#' : settings.play_store_link || '#'} target="_blank" rel="noopener noreferrer">
+                  <motion.button
+                    className="bg-white text-green-600 font-semibold px-6 py-3 rounded-lg shadow-md flex items-center gap-2 disabled:opacity-70"
+                    whileHover={{ scale: 1.05, y: -2 }}
+                    whileTap={{ scale: 0.95 }}
+                    disabled={isSettingsLoading}
+                  >
+                    <Download className="w-5 h-5" />
+                    Download Now
+                  </motion.button>
+                  </Link>
+              </div>
+            </div>
+            
         </motion.div>
       </div>
     </motion.section>
