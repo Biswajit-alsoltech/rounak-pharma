@@ -12,6 +12,7 @@ import {
   Search,
   Menu,
   X,
+  LogIn, // Added LogIn icon
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { apiFetch } from '@/lib/api';
@@ -129,15 +130,24 @@ const Navbar = () => {
           {/* Desktop Action Buttons */}
           <div className="hidden lg:flex items-center space-x-3">
             <Link href={`${settings.place_order_url || '#'}`} aria-label="Place your order">
-            <button className="bg-indigo-600 text-white px-4 py-2 rounded-full font-semibold flex items-center hover:bg-indigo-700 transition cursor-pointer">
-              <ShoppingCart size={18} className="mr-2" />
-              Place Order
-            </button>
+              <button className="bg-indigo-600 text-white px-4 py-2 rounded-full font-semibold flex items-center hover:bg-indigo-700 transition cursor-pointer">
+                <ShoppingCart size={18} className="mr-2" />
+                Place Order
+              </button>
             </Link>
+            
             <Link href={`https://wa.me/91${settings.whatsapp_no}`} target="_blank" rel="noopener noreferrer">
               <button className="bg-green-600 text-white px-4 py-2 rounded-full font-semibold flex items-center hover:bg-green-800 transition cursor-pointer">
                 <MessageCircle size={18} className="mr-2" />
                 Get in Touch
+              </button>
+            </Link>
+
+            {/* === New MM/MR Login Button (Desktop) === */}
+            <Link href="https://order.rounakpharma.com:8443/EsLiveStockSalesSupp/" target="_blank" rel="noopener noreferrer">
+              <button className="bg-blue-600 text-white px-4 py-2 rounded-full font-semibold flex items-center hover:bg-blue-700 transition cursor-pointer">
+                <LogIn size={18} className="mr-2" />
+                MM/MR Login
               </button>
             </Link>
           </div>
@@ -188,6 +198,14 @@ const Navbar = () => {
                     <button className="bg-green-500 text-white w-full px-4 py-3 rounded-full font-semibold flex items-center justify-center hover:bg-green-600 transition">
                       <MessageCircle size={18} className="mr-2" />
                       Get in Touch
+                    </button>
+                  </Link>
+
+                  {/* === New MM/MR Login Button (Mobile) === */}
+                  <Link href="https://order.rounakpharma.com:8443/EsLiveStockSalesSupp/" target="_blank" rel="noopener noreferrer">
+                    <button className="bg-blue-600 text-white w-full px-4 py-3 rounded-full font-semibold flex items-center justify-center hover:bg-blue-700 transition">
+                      <LogIn size={18} className="mr-2" />
+                      MM/MR Login
                     </button>
                   </Link>
                 </div>
