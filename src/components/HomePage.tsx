@@ -191,7 +191,7 @@ const HomePage = () => {
           />
         </div>
         <div className="container mx-auto px-4 pb-4 text-center relative z-10">
-          <h2 className="text-4xl font-bold pb-4 text-gray-800">We Serve</h2>
+          <h2 className="text-4xl font-bold pb-4 drop-shadow-md drop-shadow-lg text-white">We Serve</h2>
           <motion.div
             className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 max-w-5xl mx-auto"
             variants={gridContainerVariants}
