@@ -56,6 +56,19 @@ const LogoSkeleton = () => (
 const LogoItem = ({ company }: { company: Manufacturer }) => {
   const [imageError, setImageError] = useState(false);
 
+  // --- FIX: Helper to resolve the correct URL ---
+  const resolveLogoUrl = (path: string) => {
+    if (!path) return "";
+    // If it's already a full URL (like the "nan.png" examples), use it as is
+    if (path.startsWith("http") || path.startsWith("https")) {
+      return path;
+    }
+    // Otherwise, prepend the base path. 
+    return `https://rounak.alsoltech.in/public/products/${path}`;
+  };
+
+  const finalImageUrl = resolveLogoUrl(company.logo_image);
+
   return (
     <motion.div
       className="bg-white p-4 rounded-lg shadow-sm border border-gray-100 flex items-center justify-center h-24"
@@ -63,7 +76,7 @@ const LogoItem = ({ company }: { company: Manufacturer }) => {
       whileHover={{ scale: 1.05, y: -5, transition: { duration: 0.2 } }}
     >
       <div className="relative h-16 w-full">
-        {imageError ? (
+        {imageError || !finalImageUrl ? (
           // Fallback UI: Display company name
           <div className="w-full h-full flex items-center justify-center text-center text-gray-500 text-sm font-semibold p-2">
             {company.m_name}
@@ -71,14 +84,14 @@ const LogoItem = ({ company }: { company: Manufacturer }) => {
         ) : (
           // Next.js Image
           <Image
-            src={company.logo_image}
+            src={finalImageUrl}
             alt={`${company.m_name} Logo`}
             fill
             className="object-contain"
             sizes="150px"
             unoptimized
             onError={() => {
-              console.warn(`Failed to load image: ${company.logo_image}`);
+              console.warn(`Failed to load image: ${finalImageUrl}`);
               setImageError(true);
             }}
           />
@@ -172,8 +185,8 @@ const FeaturedCompanies = () => {
 
         <div className="mt-8">
           <Link href="/we-deal-with" passHref>
-            <motion.a
-              className="inline-flex items-center bg-blue-600 text-white font-semibold px-8 py-3 rounded-lg shadow-md hover:bg-blue-700 transition-all duration-300"
+            <motion.a // Changed to motion.a to support framer motion props on link
+              className="inline-flex items-center bg-blue-600 text-white font-semibold px-8 py-3 rounded-lg shadow-md hover:bg-blue-700 transition-all duration-300 cursor-pointer"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >

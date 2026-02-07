@@ -47,6 +47,20 @@ const LogoCard = ({ company }: { company: Manufacturer }) => {
   // Get first two letters for fallback
   const fallbackText = company.m_name ? company.m_name.substring(0, 2).toUpperCase() : '??';
 
+  // --- FIX: Helper to resolve the correct URL ---
+  const resolveLogoUrl = (path: string) => {
+    if (!path) return "";
+    // If it's already a full URL (like the "nan.png" examples), use it as is
+    if (path.startsWith("http") || path.startsWith("https")) {
+      return path;
+    }
+    // Otherwise, prepend the base path. 
+    // Data is "featured/...", so we prepend ".../products/" to make ".../products/featured/..."
+    return `https://rounak.alsoltech.in/public/products/${path}`;
+  };
+
+  const finalImageUrl = resolveLogoUrl(company.logo_image);
+
   return (
     <motion.div variants={gridItemVariants}>
       <Link href={`/we-deal-with/${company.m_name}`} passHref>
@@ -54,7 +68,7 @@ const LogoCard = ({ company }: { company: Manufacturer }) => {
           
           {/* Image container with fallback logic */}
           <div className="relative w-24 h-24 mb-4 transition-transform duration-300 group-hover:scale-110">
-            {imageError ? (
+            {imageError || !finalImageUrl ? (
               // Fallback UI: First two letters
               <div className="w-full h-full flex items-center justify-center bg-gray-200 text-gray-500 rounded-lg text-3xl font-bold">
                 {fallbackText}
@@ -62,14 +76,14 @@ const LogoCard = ({ company }: { company: Manufacturer }) => {
             ) : (
               // Next.js Image
               <Image
-                src={company.logo_image}
+                src={finalImageUrl}
                 alt={`${company.m_name} logo`}
                 fill
                 className="object-contain"
                 sizes="(max-width: 768px) 50vw, 20vw"
                 unoptimized
                 onError={() => {
-                  console.warn(`Failed to load image: ${company.logo_image}`);
+                  console.warn(`Failed to load image: ${finalImageUrl}`);
                   setImageError(true);
                 }}
               />
@@ -181,7 +195,6 @@ const WeDealWith = () => {
                         <p>{error}</p>
                     </div>
                 ) : filteredCompanies.length > 0 ? (
-                    // --- UPDATED to use new LogoCard component ---
                     filteredCompanies.map((company) => (
                       <LogoCard key={company.ma_id} company={company} />
                     ))
