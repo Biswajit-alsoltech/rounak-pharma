@@ -234,23 +234,25 @@ const HomePage = () => {
         </div>
       </motion.section>
 
-      {/* Section 3: Pharma rack Process */}
+     {/* Section 3: Pharma rack Process */}
       <motion.section
-        className="py-10 md:py-10"
+        className="py-16 md:py-20 bg-gradient-to-b from-white to-gray-50"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}
         variants={sectionVariants}
       >
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold text-blue-600 mb-3">
+          <h2 className="text-3xl md:text-4xl font-bold text-blue-600 mb-4">
             We&apos;re Available on Pharmarack
           </h2>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto">
             Seamless ordering and tracking through India’s trusted pharma platform.
           </p>
+          
           <motion.div
-            className="mt-8 flex flex-col md:flex-row items-center justify-center flex-wrap gap-y-8 md:gap-x-4 lg:gap-x-8"
+            /* Changed items-center to items-start so images lock to a top horizontal line */
+            className="mt-12 flex flex-col md:flex-row items-start justify-center md:flex-nowrap gap-y-8 md:gap-x-2 lg:gap-x-4 w-full"
             variants={gridContainerVariants}
           >
             {[
@@ -259,42 +261,53 @@ const HomePage = () => {
               { name: 'Map to Rounak Pharma', icon: 'map.jpeg' },
               { name: 'Place order', icon: 'placeorder.png' },
               { name: 'Delivery', icon: 'delivery.jpeg' },
-              
             ].map((step, index, arr) => (
               <React.Fragment key={step.name}>
                 <motion.div
-                  className="flex flex-col items-center w-50 text-center"
+                  className="flex flex-col items-center w-40 lg:w-48 text-center group"
                   variants={gridItemVariants}
                 >
-                  <Image
-                    src={`/images/process_new/${step.icon}`}
-                    alt={step.name}
-                    width={160}
-                    height={160}
-                  />
-                  {/* UNCOMMENTED THE LINE BELOW */}
-                  <p className="mt-3 font-medium text-gray-700">{step.name}</p>
+                  {/* Fixed uniform size for the image wrapper to keep the line perfect */}
+                  <div className="p-1.5 bg-white rounded-2xl shadow-sm border border-gray-100 group-hover:shadow-lg transition-all duration-300 w-[120px] h-[120px] md:w-[140px] md:h-[140px] flex items-center justify-center">
+                    <Image
+                      src={`/images/process_new/${step.icon}`}
+                      alt={step.name}
+                      width={130}
+                      height={130}
+                      className="rounded-xl object-contain w-full h-full"
+                    />
+                  </div>
+                  {/* Text sits neatly below the horizontal image line */}
+                  <p className="mt-5 font-semibold text-gray-700 group-hover:text-blue-600 transition-colors duration-300 px-2">
+                    {step.name}
+                  </p>
                 </motion.div>
+                
+                {/* Connecting Arrow - Pushed down to center perfectly with the images */}
                 {index < arr.length - 1 && (
-                  <motion.div variants={gridItemVariants}>
-                    <ArrowRight className="text-gray-300 w-10 h-10 hidden md:block" />
+                  <motion.div 
+                    variants={gridItemVariants} 
+                    className="hidden md:flex items-center justify-center pt-[45px] md:pt-[55px]"
+                  >
+                    <ArrowRight className="text-blue-300 w-8 h-8 lg:w-10 lg:h-10 animate-pulse" />
                   </motion.div>
                 )}
               </React.Fragment>
             ))}
           </motion.div>
-          <div className="mt-8">
-          <Link href={`${settings.connect_now_url}`} passHref>
-            <motion.a
-              className="inline-flex items-center bg-blue-600 text-white font-semibold px-8 py-3 rounded-lg shadow-md hover:bg-blue-700 transition-all duration-300"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              Connect Now
-              <ArrowRight className="ml-2 w-5 h-5" />
-            </motion.a>
-          </Link>
-        </div>
+
+          <div className="mt-14">
+            <Link href={settings.connect_now_url || '#'} passHref>
+              <motion.a
+                className="inline-flex items-center bg-blue-600 text-white font-semibold px-8 py-3.5 rounded-full shadow-lg hover:bg-blue-700 hover:shadow-xl transition-all duration-300"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                Connect Now
+                <ArrowRight className="ml-2 w-5 h-5" />
+              </motion.a>
+            </Link>
+          </div>
         </div>
       </motion.section>
 
