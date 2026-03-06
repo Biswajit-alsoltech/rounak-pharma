@@ -96,10 +96,10 @@ const CompactFeatureSection = () => {
         <motion.div variants={imageVariants} className="flex justify-center items-center">
           <div className="relative rounded-3xl"> 
             <Image
-              src="/images/rounak-style.jpg"
+              src="/images/growth.jpeg"
               alt="Rounak Pharma Innovation"
               width={550} // UPDATED: Reduced image width
-              height={400} // UPDATED: Reduced image height
+              height={490} // UPDATED: Reduced image height
               className="rounded-2xl"
               priority
             />

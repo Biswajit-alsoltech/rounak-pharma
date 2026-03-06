@@ -254,11 +254,11 @@ const HomePage = () => {
             variants={gridContainerVariants}
           >
             {[
-              { name: 'Login to Pharmarack', icon: 'login.png' },
-              { name: 'Search for "Rounak Pharma"', icon: 'search.png' },
-              { name: 'Map to Rounak Pharma', icon: 'map.png' },
+              { name: 'Login to Pharmarack', icon: 'login.jpeg' },
+              { name: 'Search for "Rounak Pharma"', icon: 'search.jpeg' },
+              { name: 'Map to Rounak Pharma', icon: 'map.jpeg' },
               { name: 'Place order', icon: 'placeorder.png' },
-              { name: 'Delivery', icon: 'delivery.png' },
+              { name: 'Delivery', icon: 'delivery.jpeg' },
               
             ].map((step, index, arr) => (
               <React.Fragment key={step.name}>
@@ -272,7 +272,8 @@ const HomePage = () => {
                     width={160}
                     height={160}
                   />
-                  {/* <p className="mt-3 font-medium text-gray-700">{step.name}</p> */}
+                  {/* UNCOMMENTED THE LINE BELOW */}
+                  <p className="mt-3 font-medium text-gray-700">{step.name}</p>
                 </motion.div>
                 {index < arr.length - 1 && (
                   <motion.div variants={gridItemVariants}>
