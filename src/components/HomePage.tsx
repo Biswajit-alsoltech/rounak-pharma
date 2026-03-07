@@ -259,7 +259,7 @@ const HomePage = () => {
               { name: 'Login to Pharmarack', icon: 'login.jpeg' },
               { name: 'Search for "Rounak Pharma"', icon: 'search.jpeg' },
               { name: 'Map to Rounak Pharma', icon: 'map.jpeg' },
-              { name: 'Place order', icon: 'placeorder.png' },
+              { name: 'Place order', icon: 'placeorder.jpeg' },
               { name: 'Delivery', icon: 'delivery.jpeg' },
             ].map((step, index, arr) => (
               <React.Fragment key={step.name}>
